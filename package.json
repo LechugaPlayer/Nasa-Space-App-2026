@@ -1,0 +1,45 @@
+{
+  "name": "agriculture-decision-support",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "dev:android": "vite --host 0.0.0.0",
+    "android:sync": "npm run build && cap sync android",
+    "android:build": "powershell -ExecutionPolicy Bypass -File scripts/build-android.ps1",
+    "test:calc": "node --test tests/calc.test.ts",
+    "test:ui": "playwright test",
+    "brand:sync": "node scripts/sync-brand.mjs",
+    "predev": "npm run brand:sync",
+    "prebuild": "npm run brand:sync",
+    "test": "node --test tests/*.test.ts"
+  },
+  "dependencies": {
+    "@capacitor/android": "8.6.0",
+    "@capacitor/app": "8.1.2",
+    "@capacitor/core": "8.6.0",
+    "@capacitor/filesystem": "8.1.5",
+    "@capacitor/share": "8.0.3",
+    "@vitejs/plugin-react": "6.2.1",
+    "lucide-react": "0.468.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "vite": "8.3.6"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.6.0",
+    "@playwright/test": "1.65.0",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "autoprefixer": "10.6.2",
+    "postcss": "8.5.32",
+    "tailwindcss": "3.4.19",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=24 <27"
+  }
+}
