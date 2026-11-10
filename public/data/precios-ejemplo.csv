@@ -1,0 +1,3 @@
+crop,date,market,currency,unit,price,kind
+soja,2025-03-15,Ejemplo ficticio - venta neta local,USD,USD/t,390,venta
+maiz,2025-03-15,Ejemplo ficticio - referencia sin flete,USD,USD/t,175,referencia

@@ -1,0 +1,221 @@
+{
+  "method": "Demo deterministic v2; USD; synthetic budgets; real POWER archives",
+  "cases": [
+    {
+      "case": "itapua",
+      "plot": {
+        "name": "Caso 1 · Itapúa · propio",
+        "lat": -27.1,
+        "lon": -55.8,
+        "hectares": 120,
+        "tenancy": "propio",
+        "landCost": 0,
+        "capital": 160000
+      },
+      "period": [
+        "2024-07-01",
+        "2025-06-30"
+      ],
+      "priorities": {
+        "water": false,
+        "soil": false,
+        "economy": true
+      },
+      "climate": {
+        "rain": 1626.999999999999,
+        "rainDays": 365,
+        "hotDays": 66,
+        "temperatureDays": 365,
+        "dryDays": 240,
+        "longestDry": 24,
+        "expected": 365,
+        "complete": true
+      },
+      "nasaHash": "3da6764ff6b82b3b71e007dff2053b3e6d34727a23130b9757b5629b34456208",
+      "strategies": [
+        {
+          "id": "actual",
+          "net": 66840,
+          "funding": 82920,
+          "lowNet": -28154.399999999965,
+          "highNet": 179517.59999999998,
+          "coveredDays": 234,
+          "families": [
+            "Poaceae",
+            "Fabaceae"
+          ],
+          "buyer": "desconocido"
+        },
+        {
+          "id": "diversificacion",
+          "net": 46080,
+          "funding": 96720,
+          "lowNet": -47788.79999999999,
+          "highNet": 157075.2,
+          "coveredDays": 234,
+          "families": [
+            "Poaceae"
+          ],
+          "buyer": "desconocido"
+        },
+        {
+          "id": "cobertura",
+          "net": 48840,
+          "funding": 82920,
+          "lowNet": -47954.399999999965,
+          "highNet": 163317.59999999998,
+          "coveredDays": 342,
+          "families": [
+            "Poaceae",
+            "Fabaceae"
+          ],
+          "buyer": "desconocido"
+        }
+      ]
+    },
+    {
+      "case": "alto-parana",
+      "plot": {
+        "name": "Caso 2 · Alto Paraná · alquilado",
+        "lat": -25.5,
+        "lon": -54.8,
+        "hectares": 50,
+        "tenancy": "alquilado",
+        "landCost": 500,
+        "capital": 45000
+      },
+      "period": [
+        "2024-07-01",
+        "2025-06-30"
+      ],
+      "priorities": {
+        "water": false,
+        "soil": false,
+        "economy": true
+      },
+      "climate": {
+        "rain": 1411.8099999999995,
+        "rainDays": 365,
+        "hotDays": 72,
+        "temperatureDays": 365,
+        "dryDays": 235,
+        "longestDry": 13,
+        "expected": 365,
+        "complete": true
+      },
+      "nasaHash": "b7526e14f79a5da7f05cf7f124b4db9d30ac6bb72513e86ba2bb8a943ad8953f",
+      "strategies": [
+        {
+          "id": "actual",
+          "net": -13965,
+          "funding": 67005,
+          "lowNet": -48872.600000000006,
+          "highNet": 27205.399999999994,
+          "coveredDays": 234,
+          "families": [
+            "Poaceae",
+            "Fabaceae"
+          ],
+          "buyer": "desconocido"
+        },
+        {
+          "id": "diversificacion",
+          "net": -22180,
+          "funding": 72755,
+          "lowNet": -56775.20000000001,
+          "highNet": 18480.79999999999,
+          "coveredDays": 234,
+          "families": [
+            "Poaceae"
+          ],
+          "buyer": "desconocido"
+        },
+        {
+          "id": "cobertura",
+          "net": -21465,
+          "funding": 67005,
+          "lowNet": -57122.600000000006,
+          "highNet": 20455.399999999994,
+          "coveredDays": 342,
+          "families": [
+            "Poaceae",
+            "Fabaceae"
+          ],
+          "buyer": "desconocido"
+        }
+      ]
+    },
+    {
+      "case": "caaguazu",
+      "plot": {
+        "name": "Caso 3 · Caaguazú · propio",
+        "lat": -25.4,
+        "lon": -56,
+        "hectares": 15,
+        "tenancy": "propio",
+        "landCost": 0,
+        "capital": 18000
+      },
+      "period": [
+        "2024-07-01",
+        "2025-06-30"
+      ],
+      "priorities": {
+        "water": true,
+        "soil": true,
+        "economy": false
+      },
+      "climate": {
+        "rain": 1253.08,
+        "rainDays": 365,
+        "hotDays": 67,
+        "temperatureDays": 365,
+        "dryDays": 245,
+        "longestDry": 20,
+        "expected": 365,
+        "complete": true
+      },
+      "nasaHash": "7c699da0e56023c8e66a3589496264673be8336e387c8787ba4ed56c68772846",
+      "strategies": [
+        {
+          "id": "actual",
+          "net": 8355,
+          "funding": 10365,
+          "lowNet": -3519.2999999999956,
+          "highNet": 22439.699999999997,
+          "coveredDays": 234,
+          "families": [
+            "Poaceae",
+            "Fabaceae"
+          ],
+          "buyer": "desconocido"
+        },
+        {
+          "id": "diversificacion",
+          "net": 5760,
+          "funding": 12090,
+          "lowNet": -5973.5999999999985,
+          "highNet": 19634.4,
+          "coveredDays": 234,
+          "families": [
+            "Poaceae"
+          ],
+          "buyer": "no"
+        },
+        {
+          "id": "cobertura",
+          "net": 6105,
+          "funding": 10365,
+          "lowNet": -5994.299999999996,
+          "highNet": 20414.699999999997,
+          "coveredDays": 342,
+          "families": [
+            "Poaceae",
+            "Fabaceae"
+          ],
+          "buyer": "desconocido"
+        }
+      ]
+    }
+  ]
+}

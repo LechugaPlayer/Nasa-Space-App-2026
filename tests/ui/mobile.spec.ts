@@ -3,8 +3,8 @@ import { test, expect } from '@playwright/test'
 
 test('mobile plan updates, persists, compares, exports, and resets', async ({ page }) => {
   const errors: string[] = []
-  page.on('pageerror', e => errors.push(e.message))
-  await page.goto('/?android')
+  page.on('pageerror', (e) => errors.push(e.message))
+  await page.goto('/?legacy&android')
   await expect(page.getByRole('heading', { name: /Tu próxima cosecha/ })).toBeVisible()
   await expect(page.locator('.net-card>strong')).toContainText('117.720')
   await page.getByRole('button', { name: 'Planificar', exact: true }).click()
@@ -39,12 +39,14 @@ test('mobile plan updates, persists, compares, exports, and resets', async ({ pa
 })
 
 test('all mobile pages fit narrow and standard phones', async ({ page }) => {
-  await page.goto('/?android')
+  await page.goto('/?legacy&android')
   for (const width of [320, 390, 430]) {
     await page.setViewportSize({ width, height: 844 })
     for (const name of ['Resumen', 'Planificar', 'Comparar', 'Datos']) {
       await page.getByRole('button', { name, exact: true }).click()
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+      expect(
+        await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth),
+      ).toBe(true)
     }
   }
   await page.setViewportSize({ width: 390, height: 844 })
@@ -58,6 +60,6 @@ test('all mobile pages fit narrow and standard phones', async ({ page }) => {
 
 test('desktop original remains available', async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 })
-  await page.goto('/')
+  await page.goto('/?legacy')
   await expect(page.getByRole('heading', { name: 'Calculadora de rotaciones' })).toBeVisible()
 })

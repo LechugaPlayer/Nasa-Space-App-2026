@@ -10,4 +10,4 @@ Las tareas R01–R24 están agrupadas como checklists en siete issues reales. No
 6. [M5 — Segunda evidencia opcional](https://github.com/LechugaPlayer/Nasa-Space-App-2026/issues/6)
 7. [M6 — Validación y entrega](https://github.com/LechugaPlayer/Nasa-Space-App-2026/issues/7)
 
-Orden principal: M0 → M1 → M2 → M3 → M4 → M6. Comenzar con entrevistas y calendario, no con nuevas integraciones indiscriminadas. Estimaciones y aceptación en ROADMAP.md.
+Estado de entrega: M1/M2/M4 implementados y probados; M5 evaluado y diferido conforme al roadmap. M0/M3 conservan revisión agronómica externa pendiente; M6 conserva prueba en teléfono físico pendiente. Los tres casos ficticios fueron autorizados por el propietario y no se presentan como entrevistas o fincas reales. El detalle R01–R24 está en ROADMAP.md.

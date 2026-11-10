@@ -1,7 +1,7 @@
 {
   "name": "agriculture-decision-support",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,7 +15,13 @@
     "brand:sync": "node scripts/sync-brand.mjs",
     "predev": "npm run brand:sync",
     "prebuild": "npm run brand:sync",
-    "test": "node --test tests/*.test.ts"
+    "test": "node --test tests/*.test.ts",
+    "postbuild": "node scripts/build-offline.mjs",
+    "pretest:ui": "npm run build",
+    "report:cases": "node scripts/report-cases.ts",
+    "test:live": "playwright test --config playwright.live.config.ts",
+    "format": "prettier --write src tests scripts",
+    "format:check": "prettier --check src tests scripts"
   },
   "dependencies": {
     "@capacitor/android": "8.6.0",
@@ -36,6 +42,7 @@
     "@types/react-dom": "19.3.0",
     "autoprefixer": "10.6.2",
     "postcss": "8.5.32",
+    "prettier": "3.9.10",
     "tailwindcss": "3.4.19",
     "typescript": "7.0.2"
   },

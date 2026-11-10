@@ -1,0 +1,596 @@
+:root {
+  font-family: Inter, system-ui, sans-serif;
+  color: #223c30;
+  background: #f4f5ed;
+  font-synthesis: none;
+}
+body {
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+.planner {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.planner button,
+.planner input,
+.planner select,
+.planner textarea {
+  font: inherit;
+}
+.planner button {
+  cursor: pointer;
+  border: 1px solid #c9d5c9;
+  border-radius: 9px;
+  background: #fff;
+  color: #254c39;
+  padding: 10px 14px;
+  min-height: 44px;
+}
+.planner button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.planner button:hover:not(:disabled) {
+  background: #edf3e8;
+}
+.planner .primary {
+  background: #28543e;
+  color: white;
+  border-color: #28543e;
+}
+.planner a {
+  color: #226644;
+  text-underline-offset: 3px;
+}
+.planner :focus-visible {
+  outline: 3px solid #a77416;
+  outline-offset: 3px;
+}
+.planner .skip-link {
+  position: absolute;
+  top: -100px;
+  left: 20px;
+  background: white;
+  padding: 12px;
+  z-index: 20;
+}
+.planner .skip-link:focus {
+  top: 10px;
+}
+.planner .app-header {
+  padding: 20px 32px;
+  border-bottom: 1px solid #dce2d8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background: #fbfcf8;
+}
+.planner .brand-name {
+  font-size: 23px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+  text-decoration: none;
+}
+.planner .brand-name small {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.planner .badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 6px 10px;
+  border: 1px solid #cad5bd;
+  border-radius: 6px;
+  white-space: nowrap;
+  color: #527044;
+}
+.planner .layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  max-width: 1700px;
+  margin: auto;
+}
+.planner .navigation {
+  padding: 30px 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid #dce2d8;
+}
+.planner nav {
+  display: grid;
+  gap: 6px;
+}
+.planner nav button {
+  text-align: left;
+  background: transparent;
+  border-color: transparent;
+}
+.planner nav .selected {
+  background: #e0ead9;
+  color: #214e35;
+  font-weight: 700;
+}
+.planner .nav-note {
+  font-size: 12px;
+  color: #667964;
+  margin: 35px 0;
+}
+.planner .eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.8px;
+  color: #718462;
+  margin: 0 0 10px;
+}
+.planner main {
+  min-width: 0;
+  padding: 38px;
+  max-width: 1450px;
+}
+.planner h1 {
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 3vw, 43px);
+  font-weight: 400;
+  line-height: 1.15;
+  max-width: 760px;
+  letter-spacing: -1px;
+  margin: 0 0 24px;
+}
+.planner h2 {
+  font-size: 20px;
+  line-height: 1.3;
+  margin: 0 0 14px;
+  font-weight: 650;
+}
+.planner h3 {
+  font-size: 15px;
+  margin: 24px 0 12px;
+}
+.planner p {
+  color: #536651;
+  font-size: 13px;
+}
+.planner .save-status {
+  font-size: 11px;
+  color: #5c7650;
+  margin: 0 0 24px;
+}
+.planner .panel {
+  background: #fff;
+  border: 1px solid #dee4d8;
+  border-radius: 15px;
+  padding: 26px;
+  margin-bottom: 22px;
+  min-width: 0;
+}
+.planner .section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.planner .grid.fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+.planner .field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  min-width: 0;
+}
+.planner .field > label {
+  font-size: 11px;
+  font-weight: 650;
+  color: #536651;
+}
+.planner input,
+.planner select,
+.planner textarea {
+  width: 100%;
+  border: 1px solid #cbd5c8;
+  border-radius: 7px;
+  padding: 10px;
+  background: #fbfcf9;
+  color: #223c30;
+  min-height: 44px;
+  min-width: 0;
+}
+.planner textarea {
+  min-height: 75px;
+}
+.planner input[type='checkbox'] {
+  width: 19px;
+  min-height: 19px;
+  accent-color: #28543e;
+}
+.planner .checks {
+  display: flex;
+  gap: 22px;
+  flex-wrap: wrap;
+  margin: 20px 0 28px;
+}
+.planner .checks label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  font-size: 13px;
+}
+.planner .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.planner .vertical {
+  flex-direction: column;
+}
+.planner .actions.vertical button {
+  font-size: 12px;
+}
+.planner .case-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 24px;
+}
+.planner .case-card {
+  padding: 22px;
+  background: #eaf0e1;
+  border: 1px solid #d7e0cc;
+  border-radius: 13px;
+  display: flex;
+  flex-direction: column;
+}
+.planner .case-card h2 {
+  font-family: Georgia, serif;
+  font-size: 21px;
+  font-weight: 400;
+}
+.planner .case-card button {
+  margin-top: auto;
+  font-size: 12px;
+  text-align: left;
+}
+.planner .case-card p {
+  flex: 1;
+}
+.planner .table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 12px 0;
+}
+.planner table {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: 12px;
+  text-align: left;
+}
+.planner th,
+.planner td {
+  padding: 12px;
+  border-bottom: 1px solid #e7ecdf;
+  vertical-align: top;
+}
+.planner th {
+  font-weight: 650;
+  color: #4c6546;
+}
+.planner thead th {
+  background: #f5f7ef;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.planner .calendar {
+  min-width: 1000px;
+  table-layout: fixed;
+}
+.planner .calendar th:first-child {
+  width: 190px;
+}
+.planner .calendar small {
+  display: block;
+  font-size: 10px;
+  font-weight: 400;
+}
+.planner .calendar td {
+  padding: 6px 3px;
+}
+.planner .crop {
+  display: block;
+  background: #e3edcc;
+  border-radius: 4px;
+  font-size: 10px;
+  padding: 4px;
+  margin: 4px 0;
+}
+.planner .crop-soja {
+  background: #d4e8d4;
+}
+.planner .crop-maiz {
+  background: #f4e7b8;
+}
+.planner .crop-avena {
+  background: #e4e7ca;
+}
+.planner .cycle-editor {
+  border: 1px solid #d9e3d2;
+  border-radius: 10px;
+  padding: 18px;
+  margin: 22px 0;
+}
+.planner legend {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 0 8px;
+}
+.planner summary {
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 650;
+  padding: 12px 0;
+  min-height: 44px;
+}
+.planner details {
+  border-top: 1px solid #e5eadf;
+}
+.planner .text-button {
+  border: 0;
+  padding-left: 0;
+  background: transparent;
+  font-size: 12px;
+}
+.planner .danger {
+  color: #99492f;
+}
+.planner .warning {
+  background: #fff2d8;
+  border-left: 4px solid #bd8b2c;
+  padding: 14px 18px;
+  border-radius: 5px;
+  color: #77511e;
+  overflow-wrap: anywhere;
+}
+.planner .notice {
+  background: #e9f1e3;
+  border-left: 4px solid #7c9a65;
+  padding: 13px 17px;
+  border-radius: 5px;
+  overflow-wrap: anywhere;
+}
+.planner .metric-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 24px 0;
+}
+.planner .metric-grid > div {
+  background: #f1f5e9;
+  border-radius: 10px;
+  padding: 20px;
+}
+.planner .metric-grid small,
+.planner .metric-grid span,
+.planner .metric small {
+  display: block;
+  font-size: 11px;
+  color: #5c7254;
+}
+.planner .metric-grid strong,
+.planner .metric strong {
+  display: block;
+  font-family: Georgia, serif;
+  font-size: 29px;
+  font-weight: 400;
+  color: #27543c;
+}
+.planner .provenance {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  font-size: 12px;
+  gap: 10px;
+  margin: 24px 0;
+}
+.planner dt {
+  font-weight: 650;
+}
+.planner dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.planner code {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+.planner .strategy-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+.planner .strategy {
+  padding: 22px;
+}
+.planner .metric {
+  background: #eff4e6;
+  padding: 18px;
+  border-radius: 9px;
+  margin: 20px 0;
+}
+.planner .signal {
+  border-left: 2px solid #dce6d3;
+  padding-left: 12px;
+  margin: 18px 0;
+}
+.planner .signal small {
+  display: block;
+  font-size: 9px;
+  color: #7b8d6b;
+  letter-spacing: 1px;
+}
+.planner .signal b {
+  font-size: 12px;
+}
+.planner .signal p {
+  font-size: 12px;
+  margin: 5px 0;
+}
+.planner li {
+  font-size: 13px;
+  margin: 8px 0;
+}
+.planner footer {
+  font-size: 10px;
+  text-align: center;
+  color: #76856a;
+  margin: 40px 0;
+}
+.planner dialog {
+  max-width: 460px;
+  width: calc(100% - 36px);
+  border: 1px solid #bfcfb3;
+  border-radius: 15px;
+  padding: 28px;
+  color: #28402f;
+}
+.planner dialog::backdrop {
+  background: #1c342aa6;
+}
+.planner dialog button {
+  font: inherit;
+}
+.planner .strategy-grid .table-scroll table {
+  min-width: 400px;
+}
+@media (max-width: 1150px) {
+  .planner .strategy-grid {
+    grid-template-columns: 1fr;
+  }
+  .planner .strategy {
+    padding: 24px;
+  }
+  .planner main {
+    padding: 28px;
+  }
+  .planner .layout {
+    grid-template-columns: 185px minmax(0, 1fr);
+  }
+  .planner .navigation {
+    padding: 25px 12px;
+  }
+  .planner .case-grid {
+    grid-template-columns: 1fr;
+  }
+  .planner .case-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 20px;
+  }
+  .planner .case-card .eyebrow {
+    grid-column: 1/-1;
+  }
+  .planner .case-card button {
+    grid-column: 2;
+    grid-row: 2/4;
+  }
+  .planner .case-card h2,
+  .planner .case-card p {
+    margin: 0;
+  }
+}
+@media (max-width: 700px) {
+  .planner .app-header {
+    padding: 16px 18px;
+  }
+  .planner .brand-name {
+    font-size: 18px;
+  }
+  .planner .app-header > .badge {
+    display: none;
+  }
+  .planner .layout {
+    display: block;
+  }
+  .planner .navigation {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    height: auto;
+    background: #f4f5edf5;
+    padding: 8px 10px;
+    border: 0;
+    border-bottom: 1px solid #d7dfcd;
+  }
+  .planner nav {
+    display: flex;
+    gap: 0;
+    justify-content: space-between;
+  }
+  .planner nav button {
+    padding: 10px 7px;
+    font-size: 12px;
+    text-align: center;
+  }
+  .planner .navigation > .eyebrow,
+  .planner .nav-note,
+  .planner .navigation > .actions {
+    display: none;
+  }
+  .planner main {
+    padding: 24px 16px;
+  }
+  .planner .panel {
+    padding: 18px;
+    border-radius: 12px;
+  }
+  .planner .case-card {
+    display: flex;
+    padding: 18px;
+  }
+  .planner .case-card p {
+    margin: 10px 0;
+  }
+  .planner .metric-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .planner .metric-grid > div {
+    padding: 16px;
+  }
+  .planner .provenance {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .planner dd {
+    margin-bottom: 10px;
+  }
+  .planner .cycle-editor {
+    padding: 12px;
+  }
+  .planner .grid.fields {
+    grid-template-columns: 1fr;
+  }
+  .planner .actions button {
+    flex: 1;
+  }
+  .planner h1 {
+    font-size: 32px;
+  }
+  .planner .strategy {
+    padding: 18px;
+  }
+  .planner .checks {
+    gap: 12px;
+    flex-direction: column;
+  }
+}

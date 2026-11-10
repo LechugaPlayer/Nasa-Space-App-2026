@@ -1,45 +1,68 @@
-# Proyecto Agrícola — nombre provisional
+# Proyecto Agrícola
 
-Repositorio central para comparar decisiones agrícolas con evidencia y supuestos visibles. Piloto propuesto: rotaciones en Paraguay. **Prototipo funcional, sin validación agronómica todavía.**
+Demo web y Android de apoyo a decisiones agrícolas. Compara **tres estrategias por caso** mediante calendario, clima histórico NASA POWER, restricciones y presupuestos trazables. Nombre provisional configurable en `product.json`.
 
-## Ejecutar
+**Casos ficticios, clima real.** No son establecimientos identificados ni recomendaciones agronómicas validadas. No existe afiliación oficial con NASA.
 
-Node.js 24 y npm, desde un clon limpio:
+## Probar
+
+Node 24 y npm, desde un clon limpio:
 
 ```bash
 npm ci
 npm run dev
 ```
 
-Abrir la URL de Vite; agregar `/?android` para interfaz móvil. No requiere claves.
+Para probar la versión de entrega y su modo sin conexión:
 
 ```bash
-npm test
 npm run build
-npx playwright install chromium
-npm run test:ui
+npm run preview
 ```
 
-## Implementado
+Abrir la URL indicada. En web, esperar a que termine la primera carga con conexión; el service worker guarda aplicación y tres respaldos NASA. La versión nueva se activa cuando se cierran las pestañas anteriores. En Android, los datos están incluidos en el APK.
 
-Dos escenarios editables, costos, sensibilidad, comparación y exportación CSV. Motor TypeScript compartido entre web y Android. Persistencia local en interfaz móvil (escritorio aún no guarda). Dependencias fijadas, lockfile, pruebas y workflow CI.
+## Tres contextos, distintas decisiones
 
-**Pendiente:** datos reales NASA/clima/suelo, calendario con fechas, flujo de caja y recomendaciones agronómicas personalizadas. Los datos iniciales y la tarjeta NASA son ilustrativos. APK funciona sin conexión; web todavía no tiene service worker para arrancar sin red.
+| Caso ficticio | Contexto | Lectura demostrable bajo los supuestos |
+|---|---|---|
+| Itapúa | 120 ha propias; prioridad margen | Práctica actual: neto base USD 66.840; déficit máximo USD 82.920 |
+| Alto Paraná | 50 ha alquiladas; USD 500/ha de tierra y capital limitado | Práctica actual: neto base −USD 13.965; déficit USD 67.005 frente a USD 45.000 disponibles |
+| Caaguazú | 15 ha propias; prioridad suelo/agua | Cobertura: 342 días con cultivo programado frente a 234; costo adicional USD 2.250; comprador de maíz no disponible en el supuesto |
 
-## Documentación
+La app muestra los intercambios y datos faltantes; no elige un ganador. Los rendimientos, precios, calendarios y restricciones se inventaron para explorar decisiones, con autorización del propietario del proyecto. [Casos y reproducción](docs/CASES.md).
 
-| Documento | Contenido |
-|---|---|
-| [Roadmap](ROADMAP.md) | Etapas, dependencias y aceptación |
-| [Producto](docs/PRODUCT.md) | Decisiones, variables y validación |
-| [Arquitectura](docs/ARCHITECTURE.md) | Stack y evolución |
-| [Fuentes](docs/SOURCES.md) | Referencias verificadas y límites |
-| [Cálculos](docs/CALCULATIONS.md) | Fórmulas y unidades |
-| [Nombre](docs/BRANDING.md) | Marca configurable en product.json |
-| [Android](ANDROID.md) | Compilar la app |
-| [Contribuir](CONTRIBUTING.md) | Flujo profesional |
-| [Verificación](docs/VALIDATION.md) | Evidencia y pendientes |
+## Funciones
 
-`src/`: app/motor; `tests/`: pruebas; `android/`: proyecto nativo; `docs/`: conocimiento; `.github/`: automatización. Archivos PROTOTYPE-* documentan el estado previo y no reemplazan estas instrucciones.
+- Lote, tenencia, tierra por horizonte, capital y prioridades editables.
+- Tres calendarios con hasta ocho ciclos cada uno, residuos y detección de solapamientos.
+- NASA POWER: consulta real, respaldo incluido o caché elegida explícitamente. Unidades, faltantes, cobertura, fuente, fecha y SHA-256 visibles.
+- Lluvia, días secos, rachas y calor con umbrales editables. Series mensuales y exposición por ciclo; historial no es pronóstico.
+- Restricciones de maquinaria, experiencia y comprador; reglas explicables sin puntaje opaco.
+- Presupuestos incompletos permitidos, sensibilidad baja/base/alta y caja con fechas.
+- Referencias/ventas CSV, exportación CSV y dossier JSON con plan y clima; validación al importar.
+- Persistencia local, recuperación de archivos dañados y funcionamiento sin conexión.
 
-SDK, APK, secretos, cachés y archivos sincronizados de ChatGPT se excluyen del repositorio. Licencia propia pendiente de elección del propietario; dependencias y fuentes conservan sus licencias. El proyecto no está afiliado oficialmente a NASA.
+## Verificar
+
+```bash
+npm run format:check
+npm test
+npx playwright install chromium
+npm run test:ui
+npm run report:cases
+```
+
+`test:ui` compila y prueba la versión de producción, incluido offline. Consulta real opcional (requiere red y disponibilidad del proveedor): `npm run test:live`. CI comprueba web y genera APK debug como artefacto. [Evidencia y límites](docs/VALIDATION.md).
+
+## Documentación central
+
+- [Roadmap y estado exacto](ROADMAP.md), [backlog](docs/BACKLOG.md).
+- [Arquitectura](docs/ARCHITECTURE.md), [modelo económico](docs/CALCULATIONS.md), [reglas](docs/RULES.md).
+- [Fuentes y datos](docs/SOURCES.md), [evaluación SMAP/Landsat](docs/SECOND-SOURCE.md).
+- [Guion de tres minutos](docs/DEMO.md), [Android](ANDROID.md), [cambiar nombre](docs/BRANDING.md).
+- [Contribuir](CONTRIBUTING.md), [variables futuras](docs/PRODUCT.md).
+
+`src/planner/` contiene el producto actual; `src/calc.ts` es el motor económico compartido. El prototipo previo sigue accesible con `/?legacy` y `/?legacy&android`, sin migración automática de planes. `public/data/` conserva los originales NASA; no reformatearlos porque cambia su hash. PROTOTYPE-* es documentación histórica.
+
+SDK, claves, APK, cachés y archivos sincronizados de ChatGPT no se versionan. Licencia propia pendiente de elección del propietario; dependencias y fuentes conservan sus licencias. Antes de usar en decisiones reales faltan revisión agronómica local y pruebas de campo.
