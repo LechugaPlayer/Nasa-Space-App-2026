@@ -21,5 +21,11 @@ try {
     } finally { Pop-Location }
     New-Item -ItemType Directory -Force deliverables | Out-Null
     Copy-Item -LiteralPath android/app/build/outputs/apk/debug/app-debug.apk -Destination deliverables/rotacion-demo.apk -Force
-    Get-FileHash -LiteralPath deliverables/rotacion-demo.apk -Algorithm SHA256
+    $apkPath = Join-Path $projectRoot 'deliverables/rotacion-demo.apk'
+    $hashAlgorithm = [System.Security.Cryptography.SHA256]::Create()
+    $apkStream = [System.IO.File]::OpenRead($apkPath)
+    try { $apkHash = [BitConverter]::ToString($hashAlgorithm.ComputeHash($apkStream)).Replace('-', '').ToLowerInvariant() }
+    finally { $apkStream.Dispose(); $hashAlgorithm.Dispose() }
+    [System.IO.File]::WriteAllText((Join-Path $projectRoot 'deliverables/rotacion-demo.apk.sha256'), "$apkHash  rotacion-demo.apk`n")
+    Write-Output "SHA-256: $apkHash"
 } finally { Pop-Location }

@@ -1,5 +1,22 @@
 # Compilar Android
 
+La versión actual usa el planificador v2 en web y Android, con tres respaldos POWER incluidos. El APK debug compilado queda en `deliverables/rotacion-demo.apk`, con archivo `.sha256`; también se genera como artefacto del job Android de GitHub Actions. Se instala como actualización del identificador técnico existente `py.rotacion.demo`.
+
+El pipeline es reproducible desde código/lockfile y herramientas indicadas, pero el APK debug **no es reproducible bit a bit** entre máquinas: firma debug y metadatos pueden variar. El checksum identifica un archivo concreto, no todas las compilaciones posibles. No hay publicación en tienda.
+
+## Aceptación en teléfono físico (pendiente)
+
+- [ ] Instalar APK y confirmar nombre/versión.
+- [ ] Abrir los tres casos, editar números/fechas usando teclado real.
+- [ ] Cerrar/reabrir y comprobar persistencia.
+- [ ] Modo avión: respaldos, comparación y reabrir app.
+- [ ] Compartir CSV y JSON mediante aplicaciones nativas.
+- [ ] Botón atrás: cerrar diálogo, volver a Lote y minimizar.
+
+Las pruebas Chromium y la firma del APK no cierran este checklist. Nunca registrar dispositivo como probado sin evidencia.
+
+## Entorno y comandos
+
 React/TypeScript + Capacitor 8. Requisitos: Node 24, JDK 21, Android SDK compatible con `android/variables.gradle`, conexión para la primera descarga. Consultar [entorno oficial](https://capacitorjs.com/docs/getting-started/environment-setup).
 
 ```bash

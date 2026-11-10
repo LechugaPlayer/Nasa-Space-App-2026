@@ -1,5 +1,17 @@
 # Fuentes y antecedentes
 
+## Integración implementada (2026-11-10)
+
+Tres respuestas originales NASA POWER en `public/data/power-*.json`, con índice de consultas, fechas de descarga, hash SHA-256, fuentes y versión API en `public/data/index.json`. No reformatear esos originales. `scripts/archive-power.mjs --refresh` hace nuevas consultas; sin esa opción verifica originales y hashes sin modificar fechas de procedencia. Descargar de nuevo requiere la opción explícita --refresh y validar las tres respuestas antes de escribir archivos.
+
+Período 2024-07-01 a 2025-06-30, UTC; comunidad AG. Variables PRECTOTCORR (mm/day), T2M_MAX/T2M_MIN (C). Fuente declarada por la respuesta: MERRA2/POWER. Faltante declarado por API: −999; se normaliza a null y nunca a cero. Temperatura mínima se conserva en el original aunque la señal de calor usa máxima.
+
+[Contrato Daily API](https://power.larc.nasa.gov/docs/services/api/temporal/daily/), [unidades, escala y origen](https://power.larc.nasa.gov/docs/faqs/data/), [política NASA de datos](https://science.data.nasa.gov/about/license). Datos científicos públicos de POWER, atribuidos a NASA LaRC; no se extiende una licencia de la app a proveedores ni se presupone que todos los productos NASA tengan idénticos términos. No se incluyeron datos comerciales ajenos. Catálogos SMAP/Landsat y límites: SECOND-SOURCE.md.
+
+Los casos geográficos y presupuestos son ficticios, no extraídos de fincas privadas. Coordenadas son puntos regionales de consulta. La procedencia del clima no valida los supuestos económicos o agronómicos.
+
+## Investigación inicial
+
 Revisión: 2026-11-09. Se encontró un roadmap local previo, conservado en PROTOTYPE-ROADMAP.md. No se encontró un roadmap universal listo para copiar que cubra todas las decisiones agrícolas. El roadmap del proyecto es una adaptación propia, no una metodología oficial de NASA.
 
 | Fuente primaria | Uso propuesto | Límites |
@@ -16,3 +28,4 @@ Revisión: 2026-11-09. Se encontró un roadmap local previo, conservado en PROTO
 Antes de integrar: guardar proveedor, URL exacta, producto/versión, licencia, atribución, escala espacial, fechas de observación/consulta, zona horaria, unidades, faltantes, calidad, transformaciones y hash del original. Distinguir observado, modelado, informado y supuesto. Verificar redistribución antes de guardar respaldo público.
 
 Probar caída de red, rango vacío, datos parciales y caché vencido. Nunca sustituir un fallo por datos ficticios. SMAP/Landsat y fuentes comerciales siguen pendientes de evaluación específica.
+

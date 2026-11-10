@@ -1,0 +1,9 @@
+sources/
+.tools/
+node_modules/
+dist/
+android/
+deliverables/
+public/data/
+package-lock.json
+docs/CASE-RESULTS.json

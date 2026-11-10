@@ -13,16 +13,34 @@ test('known three-campaign budget and hectare scaling', () => {
   assert.equal(a.net, b.net * 120)
 })
 test('sensitivities and fixed additional costs follow the budget', () => {
-  const scenario = { name: 'Test', color: '', crops: [{ crop: 'Soja', yieldT: 3, price: 400, direct: 500, other: 100 }] }
-  const r = calculate(scenario, 10, { Tierra: true, Maquinaria: true, Financiación: true }, 300, 100, 50, -10, -20, 20)
-  const expectedRevenue = 3 * .8 * 400 * .9 * 10
+  const scenario = {
+    name: 'Test',
+    color: '',
+    crops: [{ crop: 'Soja', yieldT: 3, price: 400, direct: 500, other: 100 }],
+  }
+  const r = calculate(
+    scenario,
+    10,
+    { Tierra: true, Maquinaria: true, Financiación: true },
+    300,
+    100,
+    50,
+    -10,
+    -20,
+    20,
+  )
+  const expectedRevenue = 3 * 0.8 * 400 * 0.9 * 10
   const expectedCost = (500 * 1.2 + 100 * 1.2 + 300 + 100 + 50) * 10
   assert.ok(Math.abs(r.net - (expectedRevenue - expectedCost)) < 1e-8)
-  assert.ok(Math.abs(r.breakPrice - expectedCost / (3 * .8 * 10)) < 1e-8)
-  assert.ok(Math.abs(r.breakYield - (expectedCost / 10) / 360) < 1e-8)
+  assert.ok(Math.abs(r.breakPrice - expectedCost / (3 * 0.8 * 10)) < 1e-8)
+  assert.ok(Math.abs(r.breakYield - expectedCost / 10 / 360) < 1e-8)
 })
 test('zero production or price does not imply zero break-even', () => {
-  const scenario = { name: 'Zero', color: '', crops: [{ crop: 'Soja', yieldT: 0, price: 0, direct: 500, other: 0 }] }
+  const scenario = {
+    name: 'Zero',
+    color: '',
+    crops: [{ crop: 'Soja', yieldT: 0, price: 0, direct: 500, other: 0 }],
+  }
   const r = calculate(scenario, 120, {}, 0, 0, 0)
   assert.equal(r.breakPrice, Infinity)
   assert.equal(r.breakYield, Infinity)
@@ -36,7 +54,18 @@ test('multiple crop campaigns do not expose a misleading blended break-even', ()
 })
 
 test('a single campaign has independently verifiable break-even and losses', () => {
-  const result = calculate({ name: 'Budget', color: '', crops: [{ crop: 'Soja', yieldT: 2, price: 300, direct: 600, other: 100 }] }, 10, {}, 0, 0, 0)
+  const result = calculate(
+    {
+      name: 'Budget',
+      color: '',
+      crops: [{ crop: 'Soja', yieldT: 2, price: 300, direct: 600, other: 100 }],
+    },
+    10,
+    {},
+    0,
+    0,
+    0,
+  )
   assert.equal(result.breakPrice, 350)
   assert.equal(result.breakYield, 700 / 300)
   assert.equal(result.net, -1000)

@@ -1,12 +1,27 @@
-# Verificación inicial — 2026-11-09
+# Verificación de entrega
 
-- `npm test`: 7 pruebas pasan (presupuesto conocido, escala por área, sensibilidad, costos adicionales, denominadores cero, equilibrio por campaña y CSV).
-- `npm run build`: TypeScript y Vite pasan.
-- `npm run test:ui`: 3 recorridos pasan en Chromium: edición/persistencia/comparación/exportación/restablecimiento; anchos 320/390/430; disponibilidad de escritorio.
-- Captura móvil inspeccionada después de cambiar marca y etiquetas.
+Fecha: 2026-11-10. Las afirmaciones siguientes distinguen software probado y validación externa pendiente.
 
-Se corrigieron exportación web fuera del horizonte, mezcla de cifras base/ajustadas, escape CSV, marca dispersa, moneda sin conversión y métricas de equilibrio mezclando campañas. Mayor costo de campaña ya no se presenta como necesidad real de capital. La sección agronómica se identifica como contenido educativo pendiente de reglas.
+## Evidencia ejecutada
 
-Limitaciones: no hay prueba en Android físico ni nuevo APK certificado en esta entrega; no hay integración NASA real, validación agronómica, auditoría de seguridad integral o prueba con productores. CI remoto se define en .github/workflows/ci.yml; comprobar su resultado en Actions, no inferirlo de estas pruebas locales.
+- 28 pruebas de dominio: fechas reales/bisiestos, estructuras inválidas, independencia entre estrategias, solapamientos, economía contrastada manualmente, tierra una vez, caja, cobertura sin ventas, costos pendientes, sensibilidad, CSV y almacenamiento dañado.
+- 10 recorridos Playwright sobre build de producción: tres casos, NASA respaldado, fallo HTTP, incompatibilidad de ubicación, umbrales inválidos/corrección, referencias de precio, dossier, recuperación, móvil/escritorio y regresión del prototipo.
+- Recorrido offline: aplicación recargada con red bloqueada; los tres respaldos verifican 365 días; comparación y CSV funcionan.
+- Consulta real NASA desde Chromium: CORS, datos y procedencia pasan (`playwright.live.config.ts`). Es una prueba puntual, no garantía de disponibilidad continua.
+- Compilación TypeScript/Vite pasa; capturas móvil/escritorio inspeccionadas.
+- APK debug compila con JDK 21 y SDK local; checksum junto al APK. Firma/manifest se verifican en el procedimiento Android.
+- Instalación de dependencias informa cero vulnerabilidades conocidas en el momento de esta entrega; no equivale a auditoría de seguridad.
 
-El primer intento de UI encontró un puerto ocupado; las pruebas definitivas usan 5197. El entorno restringido requirió ejecutar navegador/servidor con permisos locales adicionales. Esto no es requisito del producto.
+## Fallos encontrados y corregidos
+
+Objetos compartidos entre plantillas alteraban presupuestos de otras estrategias; tests independientes lo detectaron. El caché offline no coincidía con solicitudes de módulos por `Vary: Origin`; se corrigió para los recursos estáticos propios. Etiquetas implícitas de select incluían texto de opciones; ahora usan asociación explícita. Capacitor necesitaba atributo de importación JSON. El script Android generaba APK pero fallaba al calcular hash en un PowerShell sin Get-FileHash; ahora usa SHA-256 de .NET.
+
+Los recorridos de entrega usan preview de producción, no dependen de recompilación/HMR del servidor de desarrollo. No compilar dist mientras se ejecutan pruebas sobre él.
+
+## No verificado ni afirmado
+
+Teléfono físico, interacción de compartir nativo, teclado real, modo avión nativo, resultados agronómicos, entrevistas, ahorro real y calibración de cultivos. El test unitario Java de plantilla no sustituye estos puntos. SMAP/Landsat solo se verificaron a nivel de catálogo. CI remoto se comprueba en Actions por commit; no inferir su estado de las pruebas locales.
+
+## Reproducir
+
+`npm ci`; `npm run format:check`; `npm test`; `npx playwright install chromium`; `npm run test:ui`; `npm run report:cases`. Para red real: `npm run test:live`. Para APK: ANDROID.md.

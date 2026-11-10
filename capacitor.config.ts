@@ -1,4 +1,4 @@
-import product from './product.json'
+import product from './product.json' with { type: 'json' }
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {

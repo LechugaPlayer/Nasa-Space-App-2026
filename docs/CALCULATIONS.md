@@ -1,13 +1,29 @@
-# Modelo económico v0.1
+# Modelo económico v2
 
-Área: ha; rendimiento: t/ha; precio: USD/t; costos: USD/ha/campaña. USD fijo, sin conversión.
+Área en ha; rendimiento en t/ha; precio en USD/t; costos de ciclo en USD/ha. No hay conversión de moneda. Vacío significa pendiente; cero es un valor explícito.
 
-Ingreso/ha = rendimiento × (1 + ajusteRendimiento/100) × precio × (1 + ajustePrecio/100). Costo/ha = (directo + otros) × (1 + ajusteCostos/100) + adicionales activos. Tierra, maquinaria y financiación se suman **por campaña**, no por año. Evitar duplicarlos en otros rubros.
+Por ciclo: ingreso/ha = rendimiento × (1 + ajusteRendimiento/100) × precio × (1 + ajustePrecio/100). Costos/ha = (directos + otros) × (1 + ajusteCostos/100) + adicionales. Se reutiliza `src/calc.ts` con un solo cultivo por llamada.
 
-Totales: sumar por campaña y multiplicar por área. Margen bruto = ingreso menos directos. Neto = ingreso menos todos los costos activos. Impuestos/flete/oportunidad solo están incluidos si el usuario los carga explícitamente.
+Tierra = monto USD/ha del horizonte × superficie, **una sola vez** al inicio. Es independiente de los adicionales del ciclo. Cambiar propio/alquilado no inventa ni cambia el monto. En propiedad, cero no incluye costo de oportunidad; cargarlo explícitamente si se quiere evaluar.
 
-`maxCapital` conserva nombre interno pero se muestra como mayor costo de campaña. No es necesidad real de financiación: faltan fechas y acumulación de saldos.
+Neto del horizonte = suma de ingresos − costos de ciclos − tierra. No se anualiza. No hay tributos/flete/intereses implícitos: deben estar en los rubros informados. Un recurso existente se registra en notas, sin crédito monetario automático.
 
-Equilibrio solo para una campaña: precio = costo/ha ÷ rendimiento ajustado; rendimiento = costo/ha ÷ precio ajustado. Múltiples campañas o denominadores no definidos muestran No definido. No sumar toneladas de cultivos distintos para prometer un precio único.
+## Caja
 
-Comparaciones son totales del ciclo, no anualizados. Distintas duraciones no son directamente equivalentes. Sensibilidad determinista, sin probabilidades. CSV conserva valores base, neto ajustado y porcentajes; escritorio respeta horizonte. Se escapan textos y fórmulas de planilla.
+Un pago agregado por ciclo entre inicio del horizonte y siembra; un cobro agregado entre cosecha y fin del horizonte. Tierra al inicio. Sumar ingresos y pagos por día, acumular desde saldo cero. Financiación estimada = máximo(0, −mínimo saldo acumulado). Eventos del mismo día se compensan; no se modela orden intradía, interés dinámico, cuotas ni financiación aprobada. Capital disponible se compara con ese déficit, no se suma al margen.
+
+Si falta presupuesto o hay solapamiento de cultivos, no se muestra total. Los ciclos con datos completos pueden verse individualmente. Un lote sin cultivos conserva costo de tierra. Una cobertura no comercial exige ingreso cero y puede tener costo.
+
+## Sensibilidad y equilibrio
+
+| Escenario | Precio | Rendimiento | Directos/otros |
+|---|---:|---:|---:|
+| Bajo | −20% | −20% | +10% |
+| Base | 0% | 0% | 0% |
+| Alto | +20% | +20% | −10% |
+
+Adicionales y tierra permanecen fijos. Son escenarios conjuntos deterministas, no percentiles ni probabilidades.
+
+Equilibrio por ciclo: costo/ha ÷ rendimiento ajustado para precio; costo/ha ÷ precio ajustado para rendimiento. Excluye tierra del horizonte porque no se asigna arbitrariamente a un cultivo. El neto/caja global sí incluye tierra. No mezclar toneladas de cultivos diferentes. Denominadores nulos o no definidos no producen un equilibrio ficticio.
+
+CSV exporta valores base, fuente y fechas, una fila de tierra y total por estrategia. Dossier JSON conserva todo el plan y el archivo climático original como texto con hash. El hash verifica integridad, no autentica un archivo aportado por terceros.
